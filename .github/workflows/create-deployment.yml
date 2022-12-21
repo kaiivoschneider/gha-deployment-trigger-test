@@ -43,4 +43,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPO: ${{ github.repository }}
-          DEPLOYMENT_RESULT: ${{ toJSON(steps.register-deployment.outputs.result) }}
+          DEPLOYMENT_RESULT: ${{ steps.register-deployment.outputs.result }}
