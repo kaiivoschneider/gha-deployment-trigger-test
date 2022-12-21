@@ -30,6 +30,8 @@ jobs:
 
       - name: Set deployment status
         run: |
+          echo $DEPLOYMENT_RESULT
+
           DEPLOYMENT_ID="$($DEPLOYMENT_RESULT | jq .id)"
 
           gh api \
