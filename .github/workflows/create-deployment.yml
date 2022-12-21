@@ -32,7 +32,7 @@ jobs:
         run: |
           echo $DEPLOYMENT_RESULT
 
-          DEPLOYMENT_ID="$($DEPLOYMENT_RESULT | jq .id)"
+          DEPLOYMENT_ID="$(echo $DEPLOYMENT_RESULT | jq .id)"
 
           gh api \
             --method POST \
