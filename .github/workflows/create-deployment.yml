@@ -41,6 +41,6 @@ jobs:
             -f state='success' \
             -f log_url='https://google.de'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT_1 }}
           GITHUB_REPO: ${{ github.repository }}
           DEPLOYMENT_RESULT: ${{ steps.register-deployment.outputs.result }}
