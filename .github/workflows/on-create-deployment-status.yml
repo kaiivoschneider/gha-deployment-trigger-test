@@ -1,7 +1,7 @@
 name: React to deployment status
 
 on:
-  deployment
+  deployment_status
 
 jobs:
   react:
