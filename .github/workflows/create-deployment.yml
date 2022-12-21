@@ -32,7 +32,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const deployment = JSON.parse(${{ toJSON(steps.register-deployment.outputs.deployment_result) }});
+            const deployment = JSON.parse(${{ toJSON(steps.register-deployment.outputs.result) }});
 
             const response = await github.rest.repos.createDeploymentStatus({
               owner: context.repo.owner,
