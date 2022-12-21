@@ -1,0 +1,43 @@
+name: Create Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create_deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Register deployment
+        id: register-deployment
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const deployment = await github.rest.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.ref,
+              auto_merge: false,
+              required_contexts: [],
+              environment: 'Test environment',
+              description: 'Test deployment',
+              transient_environment: true,
+              production_environment: false,
+            }).then(result => result.data)
+
+            return deployment;
+
+      - name: Set deployment status
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const deployment = JSON.parse(${{ toJSON(steps.register-deployments.outputs.deployment_result) }});
+
+            const response = await github.rest.repos.createDeploymentStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              deployment_id: deployment.id,
+              state: 'success',
+              environment_url: 'https://google.de',
+            })
